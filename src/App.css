@@ -34,9 +34,9 @@
 }
 
 .back-button {
-  background: hsl(var(--card));
-  color: hsl(var(--card-foreground));
-  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--input));
   padding: 10px 20px;
   font-family: inherit;
   font-size: 14px;
@@ -46,6 +46,7 @@
   margin-top: 12px;
   transition: all 0.2s ease;
   border-radius: var(--radius);
+  font-weight: 500;
 }
 
 .back-button:hover {
@@ -64,19 +65,20 @@
   width: 100%;
   max-width: 500px;
   padding: 14px 18px;
-  border: 1px solid hsl(var(--border));
+  border: 1px solid hsl(var(--input));
   background-color: hsl(var(--card));
   font-family: inherit;
   font-size: 15px;
   outline: none;
   color: hsl(var(--foreground));
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   border-radius: var(--radius);
 }
 
 .search-input:focus {
   background-color: hsl(var(--card));
   border-color: hsl(var(--ring));
+  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
 }
 
 .search-input::placeholder {
@@ -94,7 +96,6 @@
   width: 100%;
 }
 
-/* family card */
 .family-card {
   background-color: hsl(var(--card));
   border: 1px solid hsl(var(--border));
@@ -107,9 +108,9 @@
 }
 
 .family-card:hover {
-  background-color: hsl(var(--secondary));
+  background-color: hsl(var(--card));
   border-color: hsl(var(--input));
-  transform: translateY(-1px);
+  transform: none;
 }
 
 .family-content {
@@ -155,10 +156,11 @@
   width: 0; 
   background: hsl(var(--primary));
   transition: width 0.2s ease-out; 
+  z-index: 3;
 }
 
 .family-card:hover .accent-bar {
-  width: 3px;
+  width: 4px;
 }
 
 .model-list {
@@ -170,7 +172,7 @@
 
 .results-info {
   padding: 16px 20px;
-  background-color: hsl(var(--secondary));
+  background-color: transparent;
   border-bottom: 1px solid hsl(var(--border));
   font-weight: 500;
   color: hsl(var(--foreground));
@@ -181,24 +183,21 @@
 
 .models-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 0;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+  padding: 24px;
 }
 
-/* the model card */
 .model-card {
   padding: 20px;
-  border-bottom: 1px solid hsl(var(--secondary));
-  border-right: 1px solid hsl(var(--secondary));
-  transition: background-color 0.2s ease;
+  border: 1px solid hsl(var(--border));
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  border-radius: var(--radius);
 }
 
 .model-card:hover {
   background-color: hsl(var(--secondary));
-}
-
-.model-card:last-child {
-  border-bottom: none;
+  border-color: hsl(var(--input));
 }
 
 /* when theres no results */
@@ -206,16 +205,16 @@
   grid-column: 1 / -1;
   padding: 40px 20px;
   text-align: center;
-  background-color: hsl(var(--secondary));
-  border: 1px solid hsl(var(--border));
+  background-color: transparent;
+  border: none;
 }
 
 .no-results p {
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 500;
   color: hsl(var(--muted-foreground));
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
 .model-header {
@@ -238,18 +237,17 @@
   margin: 0;
 }
 
-/* copy button */
 .copy-btn {
-  background: hsl(var(--card));
-  border: 1px solid hsl(var(--border));
-  padding: 6px 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 6px;
   cursor: pointer;
   font-size: 12px;
   color: hsl(var(--muted-foreground));
   transition: all 0.2s ease;
   flex-shrink: 0;
-  min-width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -258,7 +256,7 @@
 
 .copy-btn:hover {
   background: hsl(var(--secondary));
-  border-color: hsl(var(--input));
+  border-color: transparent;
   color: hsl(var(--foreground));
 }
 
@@ -305,7 +303,7 @@
   align-items: center;
   gap: 8px;
   padding: 24px;
-  background-color: hsl(var(--secondary));
+  background-color: transparent;
   border-top: 1px solid hsl(var(--border));
   flex-wrap: wrap;
   min-height: 60px;
@@ -313,8 +311,8 @@
 
 .pagination-btn {
   padding: 10px 14px;
-  border: 1px solid hsl(var(--border));
-  background-color: hsl(var(--card));
+  border: 1px solid hsl(var(--input));
+  background-color: hsl(var(--background));
   color: hsl(var(--foreground));
   font-family: inherit;
   font-size: 13px;
@@ -337,9 +335,9 @@
 }
 
 .pagination-btn:disabled {
-  opacity: 0.4;
+  opacity: 0.5;
   cursor: not-allowed;
-  background-color: hsl(var(--secondary));
+  background-color: hsl(var(--background));
 }
 
 .pagination-btn.active {
@@ -393,9 +391,6 @@
     font-size: 1rem;
   }
   
-  .models-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 480px) {
